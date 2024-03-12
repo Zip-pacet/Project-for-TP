@@ -2,7 +2,7 @@
 Survival of the fittest
 # Участники
 [Сурков Даниил Викторович](https://github.com/Zip-pacet?tab=repositories) <br>
-Лямкин Егор Сергеевич <br>
+[Лямкин Егор Сергеевич](https://github.com/4Bul04kka) <br>
 Затворницкая Екатерина Олеговна 
 # Сопутствующие проекту сервисы
 [Miro](https://miro.com/welcomeonboard/VTZyTkhHdzF1ZU9Td0RHWTJFdnlJNVQya3pKZDFDUFZFalNCaHlCbGRDMmRpVW9pMHpBUlZ2SFN3ZHJNMlFnOHwzNDU4NzY0NTc5ODI2MjQyMTYxfDI=?share_link_id=320428342847) <br>
