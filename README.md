@@ -7,7 +7,7 @@
 [Затворницкая Екатерина Олеговна](https://github.com/ezatvornitskaya) - Бизнес-аналитик, Дизайнер
 # Сопутствующие проекту сервисы
 * [Miro](https://miro.com/welcomeonboard/VTZyTkhHdzF1ZU9Td0RHWTJFdnlJNVQya3pKZDFDUFZFalNCaHlCbGRDMmRpVW9pMHpBUlZ2SFN3ZHJNMlFnOHwzNDU4NzY0NTc5ODI2MjQyMTYxfDI=?share_link_id=320428342847) <br>
-* [Asana](https://app.asana.com/0/1206644220986758/1206644039498108) Требуется регистрация и запрос доступа к просмотру
+* [Trello](https://trello.com/b/EHD2GlwM/тп)
 * [Яндекс метрика](https://metrika.yandex.ru/dashboard?id=97091665)
 * [Figma](https://www.figma.com/file/4Quj9MzF4YzlPfiADlIDoe/Untitled?type=design&node-id=1%3A2&mode=design&t=X3YEbRyi7cD61HTw-1)
 # Сопутсвующая проекту документация:
