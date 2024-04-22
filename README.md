@@ -18,3 +18,4 @@
 * [Презентация](https://github.com/Zip-pacet/Project-for-TP/blob/main/Documentation/%D0%9F%D1%80%D0%B5%D0%B7%D0%B5%D0%BD%D1%82%D0%B0%D1%86%D0%B8%D1%8F/%D0%9F%D1%80%D0%B5%D0%B7%D0%B5%D0%BD%D1%82%D0%B0%D1%86%D0%B8%D1%8F_2.0.pdf)
 # Сопутствующие проекту видео:
 * [Видеопрезентация](https://youtu.be/-CdxAAl24JQ)
+* [Видеоотчет по 2й аттестации](https://youtu.be/nfgjpEt-a_E)
