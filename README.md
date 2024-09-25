@@ -3,7 +3,7 @@
 Корпоративный сайт IT компании, с новостями, мероприятиями и информацией о сотрудниках.
 # Участники
 [Сурков Даниил Викторович](https://github.com/Zip-pacet?tab=repositories) - Analitic, technical writer  <br>
-[Лямкин Егор Сергеевич](https://github.com/4Bul04kka) - Frontend&bek developer <br>
+[Лямкин Егор Сергеевич](https://github.com/4Bul04kka) - Frontend&backend developer <br>
 # Сопутствующие проекту сервисы
 * [Miro](https://miro.com/welcomeonboard/VTZyTkhHdzF1ZU9Td0RHWTJFdnlJNVQya3pKZDFDUFZFalNCaHlCbGRDMmRpVW9pMHpBUlZ2SFN3ZHJNMlFnOHwzNDU4NzY0NTc5ODI2MjQyMTYxfDI=?share_link_id=320428342847) <br>
 * [Trello](https://trello.com/b/EHD2GlwM/тп)
