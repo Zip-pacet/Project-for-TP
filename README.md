@@ -21,4 +21,4 @@
 * [Видеопрезентация](https://youtu.be/-CdxAAl24JQ)
 * [Видеоотчет по 2й аттестации](https://youtu.be/nfgjpEt-a_E)
 # Frontend & Backend :
-* [Фронт & Бек] (https://github.com/Zip-pacet/Project-for-TP/blob/main/Links)
+* ([Фронт & Бек](https://github.com/Zip-pacet/Project-for-TP/blob/main/Link%20to%20front%26bakend))
