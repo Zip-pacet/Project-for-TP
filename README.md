@@ -4,7 +4,7 @@ http://lunaris.ddns.net/
 Корпоративный сайт IT компании, с новостями, мероприятиями и информацией о сотрудниках.
 # Участники
 [Сурков Даниил Викторович](https://github.com/Zip-pacet?tab=repositories) - Аналитик, технический писатель  <br>
-[Лямкин Егор Сергеевич](https://github.com/4Bul04kka) - Фронтенд&бекэнд разработчик <br>
+[Лямкин Егор Сергеевич](https://github.com/4Bul04kka) - Фронтенд разработчик <br>
 [Думиника Виктор Николаевич](https://github.com/memes0rep) - Ассистент <br>
 # Сопутствующие проекту сервисы
 * [Miro](https://miro.com/welcomeonboard/VTZyTkhHdzF1ZU9Td0RHWTJFdnlJNVQya3pKZDFDUFZFalNCaHlCbGRDMmRpVW9pMHpBUlZ2SFN3ZHJNMlFnOHwzNDU4NzY0NTc5ODI2MjQyMTYxfDI=?share_link_id=320428342847) <br>
