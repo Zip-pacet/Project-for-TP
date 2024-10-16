@@ -14,7 +14,7 @@ http://lunaris.ddns.net/
 [Лямкин Егор Сергеевич](https://github.com/4Bul04kka) - Фронтенд разработчик <br>
 [Думиника Виктор Николаевич](https://github.com/memes0rep) - Ассистент <br>
 # Сопутствующие проекту сервисы
-* [Miro](https://miro.com/welcomeonboard/VTZyTkhHdzF1ZU9Td0RHWTJFdnlJNVQya3pKZDFDUFZFalNCaHlCbGRDMmRpVW9pMHpBUlZ2SFN3ZHJNMlFnOHwzNDU4NzY0NTc5ODI2MjQyMTYxfDI=?share_link_id=320428342847) <br>
+* [Miro](https://miro.com/app/board/uXjVNqavRuY=/?share_link_id=906294977107) <br>
 * [Trello](https://trello.com/b/EHD2GlwM/тп)
 * [Яндекс метрика](https://metrika.yandex.ru/dashboard?id=97091665)
 * [Figma](https://www.figma.com/file/4Quj9MzF4YzlPfiADlIDoe/Untitled?type=design&node-id=1%3A2&mode=design&t=X3YEbRyi7cD61HTw-1)
