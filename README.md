@@ -23,7 +23,7 @@
 * [Видеоотчет по 2й аттестации](https://youtu.be/nfgjpEt-a_E)
 * [Видеопрезентация работы приложения](https://drive.google.com/file/d/1SJM8vTuop9xwlCYOt3R0qYz2PpL__vJu/view?usp=sharing)
 # Ссылка на проект
-http://lunaris.ddns.net/
+http://lunaris.ddns.net/ <br>
 Администратор
 * Логин: admin 1
 * Пароль: password <br>
