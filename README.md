@@ -34,5 +34,5 @@ http://lunaris.ddns.net/ <br>
 Для того чтобы зайти под Admin необходимо в футере сайта в правом углу нажать на логотип Lunaris.
 Чтобы выйти нужно снова нажать на логотип Lunaris в футере сайта. <br>
 
-# Frontend :
+# Ссылки на код 
 * ([Фронт](https://github.com/Zip-pacet/Project-for-TP/blob/main/Link%20to%20frontend)))
