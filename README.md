@@ -24,9 +24,11 @@
 * [Видеопрезентация работы приложения](https://drive.google.com/file/d/1SJM8vTuop9xwlCYOt3R0qYz2PpL__vJu/view?usp=sharing)
 # Ссылка на проект
 http://lunaris.ddns.net/ <br>
+<br>
 Администратор
 * Логин: admin 1
 * Пароль: password <br>
+<br>
 Для того чтобы зайти под Admin необходимо в футере сайта в правом углу нажать на логотип Lunaris.
 Чтобы выйти нужно снова нажать на логотип Lunaris в футере сайта.
 # Frontend :
