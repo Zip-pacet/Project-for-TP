@@ -1,0 +1,42 @@
+
+.portfolio {
+    display: flex;
+    flex-direction: column;
+    background-color: #2C3247;
+    padding: 75px 20px 0px 20px;
+  }
+  .container {
+    max-width: 1575px;
+    margin: 0 auto;
+  }
+  
+  .portfolio-header {
+    font-size: 36px;
+    color: #fff;
+    margin-bottom: 75px;
+  }
+  .portfolio-blocks{
+    display: flex;
+    flex-direction: row;
+  }
+  
+  .portfolio-block {
+    max-width: 600px;
+    height: 1100px;
+    background-color: #28264e;
+    border-radius: 15px;
+    padding: 20px;
+    margin: 0 20px 50px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .portfolio-block-text {
+    font-size: 24px;
+    color: #fff;
+  }
+  
+  .portfolio-block-link {
+    text-decoration: none;
+  }

@@ -1,0 +1,42 @@
+.header {
+  background-color: #19233C;
+  color: #fff;
+  width: 100%;
+  height: 80px; /* Ensure this matches the Figma model height */
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 2rem; /* Adds padding to the sides */
+}
+
+.header-logo img {
+  height: 50px; /* Make the logo smaller */
+  margin: 10px 2rem; /* Adds space above and below the logo */
+}
+
+.header-nav-list {
+  list-style: none;
+  display: flex;
+  align-items: center;
+  margin: 0;
+  padding: 0;
+  gap: 3rem; /* Adjust spacing between nav items */
+}
+
+.header-nav-link {
+  color: #ffffff;
+  text-decoration: none;
+  font-size: 1.8rem; /* Increased font size for nav links */
+  font-weight: 500;
+  transition: color 0.3s ease;
+}
+
+.header-nav-link:hover,
+.header-nav li.active .header-nav-link {
+  color: #ffffff;
+  border-bottom: 2px solid #fff299; /* Underline on hover and active state */
+}
+
+.header-buttons-container {
+  display: none; /* Buttons are no longer needed */
+}

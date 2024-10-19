@@ -1,0 +1,54 @@
+.communication{
+  background-color: #2C3247;
+}
+.contacts-container {
+    color: #FFFFFF; /* Белый текст */
+    padding: 40px 75px;
+    max-width: 1575px;
+    min-height: 740px;
+    margin: 0 auto;
+
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  .contacts-title {
+    font-size: 32px;
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  
+  .contacts-info {
+    margin-bottom: 30px;
+  }
+  
+  .contacts-subtitle {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 10px;
+  }
+  
+  .contacts-description {
+    font-size: 18px;
+    line-height: 1.6;
+  }
+  
+  .contact-person {
+    margin-bottom: 20px;
+  }
+  
+  .contact-name {
+    font-size: 20px;
+    font-weight: bold;
+  }
+  
+  .contact-position {
+    font-size: 18px;
+  }
+  
+  .contact-phone,
+  .contact-email {
+    font-size: 16px;
+  }
+  
