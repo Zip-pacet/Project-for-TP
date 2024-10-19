@@ -1,0 +1,17 @@
+.about_block {
+  background: #19233c;
+  max-width: 600px;
+  width: 100%;
+  border-radius: 15px;
+
+  padding: 20px;
+}
+
+.about_block_text {
+  font-size: 24px;
+  color: #fff;
+}
+
+.about_block_link {
+  text-decoration: none;
+}

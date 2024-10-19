@@ -1,0 +1,28 @@
+.work_item {
+  background-color: #333a50;
+  padding: 20px;
+  border-radius: 16px;
+  border: solid 1px #fff299;
+}
+
+.work_image {
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+}
+
+.work_info {
+  margin-top: 15px;
+}
+
+.work_title {
+  font-size: 18px;
+  color: #e6e6e6;
+  margin-bottom: 10px;
+}
+
+.work_description {
+  font-size: 14px;
+  color: #e6e6e6;
+  opacity: 0.8;
+}

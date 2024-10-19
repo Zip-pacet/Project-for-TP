@@ -1,0 +1,21 @@
+.our-works {
+  min-height: calc(100vh - 210px);
+
+  background-color: #2c3247;
+  padding: 50px 0;
+  text-align: center;
+}
+
+.works-title {
+  font-size: 36px;
+  color: #e6e6e6;
+  margin-bottom: 40px;
+}
+
+.works-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 30px;
+  max-width: 1200px;
+  margin: 0 auto;
+}

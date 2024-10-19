@@ -1,0 +1,19 @@
+.card {
+  background-color: #2e324b;
+  padding: 20px;
+  border-radius: 10px;
+  text-align: center;
+}
+
+.image {
+  width: 100%;
+  height: auto;
+  border-radius: 10px;
+  margin-bottom: 10px;
+}
+
+.title {
+  font-size: 20px;
+  color: #ffffff;
+  font-weight: bold;
+}

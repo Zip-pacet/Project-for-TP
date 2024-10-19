@@ -1,0 +1,38 @@
+/* servicesImgBlock.module.css */
+
+.block {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  gap: 15px;
+  align-items: center;
+  width: 100%;
+  text-align: center;
+  margin: 10px 0;
+
+  padding: 10px 10px;
+  background: transparent;
+  border: 1px solid #fff299;
+  cursor: pointer;
+  border-radius: 16px;
+}
+
+.block img {
+  border: 1px solid #fff299;
+  max-width: 40%;
+  height: auto;
+  border-radius: 10px;
+  margin-bottom: 15px;
+}
+
+.h2 {
+  font-size: 24px;
+  margin-bottom: 10px;
+  color: #fff;
+}
+
+.block p {
+  font-size: 20px;
+  color: #fff;
+  margin-top: 5px;
+}

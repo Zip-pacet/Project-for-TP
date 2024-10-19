@@ -1,0 +1,32 @@
+.block_item {
+  padding: 30px 10px;
+  color: #fff;
+  border-radius: 16px;
+  font-size: 20px;
+  list-style: none;
+  width: 32%;
+  text-align: center;
+  background: transparent;
+  border: 1px solid #fff299;
+}
+
+.block_item_image {
+  width: 100%;
+  height: auto;
+  margin-bottom: 10px;
+  border: 1px solid #fff299;
+  border-radius: 16px;
+}
+
+.block_item h2 {
+  color: #fff;
+  font-size: 24px;
+  text-transform: uppercase;
+  margin-bottom: 16px;
+}
+
+.block_item_text {
+  color: #fff;
+  margin-top: 10px;
+  line-height: 1.5;
+}

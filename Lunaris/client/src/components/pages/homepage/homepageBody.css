@@ -1,107 +1,69 @@
 .body {
   background-color: #2c3247;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
   width: 100%;
+  min-height: calc(100vh - 210px);
 }
 .container {
   max-width: 1575px;
   padding: 0 75px;
   margin: 0 auto;
 }
-.block {
-  margin-bottom: 40px;
-}
+
 .block-header {
   color: #e6e6e6;
   text-transform: uppercase;
   text-align: center;
-
-  margin-bottom: 16px;
-  margin-top: 24px;
-  margin-left: 24px;
+  margin-bottom: 20px;
+  padding-top: 70px;
   font-size: 32px;
 }
 
 .block-row {
   display: flex;
   justify-content: space-around;
-  gap: 20px;
+  gap: 10px;
   flex-wrap: wrap;
 }
 
-.block-item {
-  padding: 30px 20px;
-  color: #fff;
-  border-radius: 16px;
-  font-size: 20px;
-  list-style: none;
-  width: 30%;
-  text-align: center;
-
-  background: transparent;
-  border: 2px solid #fff299;
-}
-
-.block-item img {
-  width: 100%;
-  height: auto;
-  margin-bottom: 10px;
-}
-.block-item h2 {
-  font-size: 24px;
-  text-transform: uppercase;
-  margin-bottom: 16px;
-}
-.block-item a {
-  display: block;
-  text-decoration: none;
-  color: inherit;
-}
-
-.block-item-text {
-  margin-top: 10px; /* Reduced spacing for a more compact look */
-  line-height: 1.5;
-}
-
-.block-text {
-  color: #fff;
-}
 .block-table {
-  width: 100%;
-  max-width: 100%;
-
+  width: 80%;
   height: 275px;
   border-radius: 16px;
   background: transparent;
-  border: 2px solid #fff299;
-
+  border: 1px solid #fff299;
   display: flex;
   justify-content: space-between;
   gap: 20px;
   padding: 20px 50px;
   color: #fff;
-  font-size: 18px;
+  font-size: 24px;
+  margin: 0 auto;
 }
 .block-table-column {
   display: flex;
   flex-direction: column;
   justify-content: space-around;
 }
-
-.block-table-cell1 p,
-.block-table-cell2 p {
-  margin: 10px 0;
-  display: flex;
-  align-items: center;
-}
-.block-table-cell1 p:before,
-.block-table-cell2 p:before {
-  content: "•"; /* Added bullet points */
-  margin-right: 10px;
-  color: #e6e6e6; /* Adjusted bullet color for better contrast */
-}
-
 .about-us-text {
   color: #fff;
   font-size: 24px;
+  text-align: block;
+}
+
+.news {
+  margin: auto;
+}
+
+.newsImg {
+  max-width: 80%;
+  height: auto;
+  border: 1px solid #fff299;
+  border-radius: 16px;
+
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+.adjust_about {
+  margin-bottom: 40px;
 }

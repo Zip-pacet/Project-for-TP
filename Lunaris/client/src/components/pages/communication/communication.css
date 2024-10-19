@@ -1,54 +1,75 @@
-.communication{
-  background-color: #2C3247;
+.communication {
+  background-color: #2c3247;
+  min-height: calc(100vh - 210px);
+  padding: 40px 20px;
 }
-.contacts-container {
-    color: #FFFFFF; /* Белый текст */
-    padding: 40px 75px;
-    max-width: 1575px;
-    min-height: 740px;
-    margin: 0 auto;
 
-    display: flex;
-    justify-content: space-between;
+.contacts-container {
+  text-align: center;
+  color: #ffffff;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.contacts-title {
+  font-size: 32px;
+  font-weight: bold;
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.contacts-info-wrapper {
+  background: #19233c;
+  border: 1px solid #fff299;
+  border-radius: 16px;
+  padding: 20px 0px;
+  display: flex;
+  justify-content: space-between;
+  gap: 40px;
+  flex-wrap: wrap;
+}
+
+.contacts-info {
+  flex: 1;
+  min-width: 250px;
+  margin-bottom: 30px;
+}
+
+.contacts-subtitle {
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.contacts-description {
+  font-size: 18px;
+  line-height: 1.6;
+}
+
+.contact-person {
+  margin-bottom: 20px;
+}
+
+.contact-name {
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.contact-position {
+  font-size: 18px;
+}
+
+.contact-phone,
+.contact-email {
+  font-size: 16px;
+}
+
+@media (max-width: 768px) {
+  .contacts-info-wrapper {
+    flex-direction: column;
   }
-  
-  .contacts-title {
-    font-size: 32px;
-    font-weight: bold;
-    text-align: center;
-    margin-bottom: 20px;
+
+  .contacts-container {
+    padding: 20px;
   }
-  
-  .contacts-info {
-    margin-bottom: 30px;
-  }
-  
-  .contacts-subtitle {
-    font-size: 24px;
-    font-weight: bold;
-    margin-bottom: 10px;
-  }
-  
-  .contacts-description {
-    font-size: 18px;
-    line-height: 1.6;
-  }
-  
-  .contact-person {
-    margin-bottom: 20px;
-  }
-  
-  .contact-name {
-    font-size: 20px;
-    font-weight: bold;
-  }
-  
-  .contact-position {
-    font-size: 18px;
-  }
-  
-  .contact-phone,
-  .contact-email {
-    font-size: 16px;
-  }
-  
+}

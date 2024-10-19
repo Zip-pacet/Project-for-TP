@@ -1,6 +1,6 @@
 import React from "react";
 import "./header.css";
-import logo from "../../../img/logo_hori.jpg";
+import { logo_header } from "./../../../img/img_exports";
 
 import { Link, useMatch, useResolvedPath } from "react-router-dom";
 
@@ -10,7 +10,7 @@ function Header() {
       <div className='container'>
         <div className='header-logo'>
           <Link to='/' className='logo-link'>
-            <img src={logo} alt='Logo' className='header-logo' />
+            <img src={logo_header} alt='Logo' className='header-logo' />
           </Link>
         </div>
         <div className='header-navbar-container'>
