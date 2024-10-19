@@ -1,14 +1,16 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import MyButton from "../../../../ui/button/MyButton";
+import classes from "./googleForm.module.css";
 
-function GoogleForm() {
+function GoogleForm(props) {
   return (
     <Link
-      to='https://docs.google.com/forms/d/e/1FAIpQLScMkqQMrM08tx11qjL17hnMdeFwd0mqxItb1d9PkexnUbXR2Q/viewform?embedded=true'
+      onClick={props.function}
+      to={props.link}
       target='_blank'
+      className={classes.googleFormButton}
     >
-      <MyButton>Оставить заявку</MyButton>
+      Оставить заявку
     </Link>
   );
 }

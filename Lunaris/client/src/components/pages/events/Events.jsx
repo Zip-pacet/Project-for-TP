@@ -1,4 +1,4 @@
-import React, { useState, useMemo, useEffect } from "react";
+import React, { useState, useMemo, useEffect, useContext } from "react";
 import { Link } from "react-router-dom";
 import "./events.css";
 import PostList from "../../ui/postform/PostList";
@@ -8,46 +8,85 @@ import MyModal from "../../ui/modal/MyModal";
 import MyButton from "../../ui/button/MyButton";
 import { usePosts } from "../../hooks/usePosts";
 import PostService from "../../../API/PostService";
+import Loader from "../../ui/loader/Loader";
+import { useFetching } from "../../hooks/useFetching";
+import { getPageCount } from "../../../utils/pages";
+import Pagination from "../../ui/pagination/Pagination";
+import { AuthContext } from "../../../context";
 
 function Events() {
+  const { isAuth } = useContext(AuthContext);
   const [posts, setPosts] = useState([]);
   const [filter, setFilter] = useState({ sort: "", query: "" });
+  const [totalPages, setTotalPages] = useState(0);
+  const [limit, setLimit] = useState(10);
+  const [page, setPage] = useState(() => {
+    const savedPage = localStorage.getItem("currentPage");
+    return savedPage ? JSON.parse(savedPage) : 1; // Default to page 1 if no saved page
+  });
   const [modal, setModal] = useState(false);
   const sortedAndSearchedPosts = usePosts(posts, filter.sort, filter.query);
-  const [arePostsLoading, setPostsAreLoading] = useState(false);
+
+  const [fetchPosts, arePostsLoading, postError] = useFetching(
+    async (limit, page) => {
+      const response = await PostService.getAll(limit, page);
+      setPosts(response.data);
+      const totalCount = response.headers["x-total-count"];
+      setTotalPages(getPageCount(totalCount, limit));
+    }
+  );
 
   useEffect(() => {
-    fetchPosts();
-  }, []);
+    fetchPosts(limit, page);
+  }, [limit, page]);
 
-  const createPost = (newPost) => {
-    setPosts([...posts, newPost]);
-    setModal(false);
+  useEffect(() => {
+    localStorage.setItem("currentPage", JSON.stringify(page)); // Save current page to local storage
+  }, [page]);
+
+  // Updated createPost to use PostService.createPost
+  const createPost = async (newPost) => {
+    try {
+      const response = await PostService.createPost(newPost);
+      setPage(1);
+      setPosts([response.data, ...posts]);
+      setModal(false);
+    } catch (error) {
+      console.error("Error creating post:", error);
+    }
   };
-
-  async function fetchPosts() {
-    setPostsAreLoading(true);
-    const posts = await PostService.getAll();
-    setPosts(posts);
-    setPostsAreLoading(false);
-  }
 
   const removePost = (post) => {
     setPosts(posts.filter((p) => p.id !== post.id));
+  };
+
+  const changePage = (newPage) => {
+    setPage(newPage);
+    fetchPosts(limit, newPage);
   };
 
   return (
     <div className='events'>
       <div className='container'>
         <div>
-          <MyButton onClick={fetchPosts}>Запросить посты</MyButton>
-          <MyButton onClick={() => setModal(true)}>Создать новость</MyButton>
-          <MyModal visible={modal} setVisible={setModal}>
-            <PostForm create={createPost} />
-          </MyModal>
+          {isAuth && (
+            <div>
+              <MyButton onClick={fetchPosts}>Запросить посты</MyButton>
+              <MyButton onClick={() => setModal(true)}>
+                Создать новость
+              </MyButton>
+              <MyModal visible={modal} setVisible={setModal}>
+                <PostForm create={createPost} />
+              </MyModal>
+            </div>
+          )}
+
           <PostFilter filter={filter} setFilter={setFilter} />
+          {postError && <h1>Произошла ошибка {postError}</h1>}
           {arePostsLoading ? (
-            <h1> Загрузка...</h1>
+            <div className='loading'>
+              <Loader />
+            </div>
           ) : (
             <PostList
               remove={removePost}
@@ -55,6 +94,13 @@ function Events() {
               title={"Новости и мероприятия"}
             />
           )}
+          <div className='pag'>
+            <Pagination
+              page={page}
+              changePage={changePage}
+              totalPages={totalPages}
+            />
+          </div>
         </div>
       </div>
     </div>

@@ -1,0 +1,26 @@
+.portfolio_block {
+  max-width: 600px;
+  border: 1px solid #fff299;
+  border-radius: 16px;
+  padding: 21px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  background-color: #19233c;
+}
+
+.portfolio_block_image {
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+  border: 1px solid #fff299;
+}
+
+.portfolio_block_text {
+  padding-top: 30px;
+  color: #e6e6e6;
+  text-align: center;
+  font-size: 24px;
+  padding-bottom: 30px;
+}
