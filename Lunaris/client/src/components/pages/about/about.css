@@ -1,0 +1,42 @@
+
+.about {
+    display: flex;
+    flex-direction: column;
+    background-color: #2C3247;
+    padding: 75px 20px 0px 20px;
+  }
+  .container {
+    max-width: 1575px;
+    margin: 0 auto;
+  }
+  
+  .about-header {
+    font-size: 36px;
+    color: #fff;
+    margin-bottom: 75px;
+  }
+  .about-blocks{
+    display: flex;
+    flex-direction: row;
+  }
+  
+  .about-block {
+    max-width: 600px;
+    height: 1100px;
+    background-color: #28264e;
+    border-radius: 15px;
+    padding: 20px;
+    margin: 0 20px 50px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .about-block-text {
+    font-size: 24px;
+    color: #fff;
+  }
+  
+  .about-block-link {
+    text-decoration: none;
+  }

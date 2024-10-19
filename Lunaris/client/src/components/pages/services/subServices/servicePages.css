@@ -1,0 +1,19 @@
+.work-details {
+  display: flex;
+  align-items: center;
+  background-color: #2c3247;
+  color: #e6e6e6;
+  padding: 75px 20px;
+  min-height: 735px;
+}
+.container {
+  max-width: 1575px;
+  margin: 0 auto;
+}
+.service-header {
+  text-align: center;
+  font-size: 36px;
+  color: #fff;
+  margin-bottom: 40px;
+  /* Center the text within the header */
+}
