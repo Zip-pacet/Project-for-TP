@@ -1,5 +1,6 @@
 import Post from "./Post.js";
 import PostService from "./PostService.js";
+import FileService from "./fileService.js"; // Путь должен быть корректным
 
 class PostController {
   async create(req, res) {
@@ -9,16 +10,22 @@ class PostController {
         return res.status(400).json({ message: "Файл не найден" });
       }
 
+      console.log("Файл для сохранения:", req.files.picture); // Отладочное сообщение
+
       // Сохраняем файл и дожидаемся завершения
       const pictureName = await FileService.saveFile(req.files.picture);
+      console.log("Имя сохранённого файла:", pictureName); // Отладочное сообщение
 
       // Создание поста с использованием данных из тела запроса и имени файла
       const post = await PostService.create({
         ...req.body,
         picture: pictureName,
       });
+
+      console.log("Созданный пост:", post); // Отладочное сообщение
       res.status(201).json(post); // Возвращаем созданный пост с статусом 201
     } catch (e) {
+      console.error("Ошибка при создании поста:", e); // Отладочное сообщение
       res
         .status(500)
         .json({ message: "Ошибка создания поста", error: e.message });

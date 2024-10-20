@@ -2,10 +2,14 @@ import Post from "./Post.js";
 import fileService from "./fileService.js";
 
 class PostService {
-  async create(post, picture) {
-    const fileName = fileService.saveFile(picture);
-    const createdPost = await Post.create({ ...post, picture: fileName });
-    return createdPost;
+  async create(postData) {
+    try {
+      const post = new Post(postData);
+      return await post.save(); // Здесь могут возникнуть проблемы с валидацией
+    } catch (e) {
+      console.error("Ошибка при сохранении поста:", e); // Отладочное сообщение
+      throw e; // Пробрасываем ошибку выше
+    }
   }
 
   async getAll() {
