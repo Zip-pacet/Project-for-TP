@@ -35,4 +35,4 @@ http://lunaris.ddns.net/ <br>
 Чтобы выйти нужно снова нажать на логотип Lunaris в футере сайта. <br>
 
 # Ссылки на код 
-* ([frontend](https://github.com/Zip-pacet/Project-for-TP/blob/main/Link%20to%20frontend))
+* ([Код](https://github.com/Zip-pacet/Project-for-TP/tree/main/Lunaris)
