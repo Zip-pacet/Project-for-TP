@@ -1,5 +1,5 @@
 import Post from "./Post.js";
-import PostService from "./PostService.js";
+import PostService from "./ServPostService.js";
 import FileService from "./fileService.js";
 
 class PostController {
@@ -30,19 +30,46 @@ class PostController {
 
   async getAll(req, res) {
     try {
-      const posts = await PostService.getAll();
+      // Извлекаем параметры запроса
+      const limit = parseInt(req.query._limit) || 10; // По умолчанию 10
+      const page = parseInt(req.query._page) || 1; // По умолчанию 1
+      const sort = req.query._sort || "id"; // По умолчанию по id
+      const order = req.query._order === "desc" ? "desc" : "asc"; // Сортировка по убыванию или возрастанию
+
+      console.log(
+        `Получение постов: limit=${limit}, page=${page}, sort=${sort}, order=${order}`
+      );
+
+      // Получаем посты из сервиса
+      const posts = await PostService.getAll(limit, page, sort, order);
+
+      console.log("Посты получены:", posts);
       return res.json(posts);
     } catch (e) {
-      res.status(500).json(e);
+      console.error("Ошибка при получении постов:", e);
+      res
+        .status(500)
+        .json({ message: "Ошибка получения постов", error: e.message });
     }
   }
 
   async getOne(req, res) {
     try {
-      const post = await PostService.getOne(req.params.id);
+      const postId = req.params.id;
+      console.log(`Запрос на получение поста с ID: ${postId}`);
+
+      const post = await PostService.getOne(postId);
+      if (!post) {
+        return res.status(404).json({ message: "Пост не найден" });
+      }
+
+      console.log("Пост найден:", post);
       return res.json(post);
     } catch (e) {
-      res.status(500).json(e);
+      console.error(`Ошибка при получении поста с ID ${req.params.id}:`, e);
+      res
+        .status(500)
+        .json({ message: "Ошибка получения поста", error: e.message });
     }
   }
 
@@ -62,6 +89,11 @@ class PostController {
       }
 
       const updatedPost = await PostService.update(req.params.id, req.body);
+      if (!updatedPost) {
+        return res.status(404).json({ message: "Пост не найден" });
+      }
+
+      console.log("Обновленный пост:", updatedPost);
       return res.json(updatedPost);
     } catch (e) {
       console.error("Ошибка при обновлении поста:", e);
@@ -73,12 +105,18 @@ class PostController {
 
   async delete(req, res) {
     try {
-      const post = await PostService.delete(req.params.id);
+      const postId = req.params.id;
+      console.log(`Запрос на удаление поста с ID: ${postId}`);
+
+      const post = await PostService.delete(postId);
       if (!post) {
         return res.status(404).json({ message: "Пост не найден" });
       }
+
+      console.log("Пост удален:", post);
       return res.json({ message: "Пост удален" });
     } catch (e) {
+      console.error("Ошибка удаления поста:", e);
       res
         .status(500)
         .json({ message: "Ошибка удаления поста", error: e.message });
