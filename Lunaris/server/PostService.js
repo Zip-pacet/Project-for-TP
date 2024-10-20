@@ -24,14 +24,20 @@ class PostService {
     return post;
   }
 
-  async update(post) {
-    if (!post._id) {
-      throw new Error("не указан ID");
+  async update(id, postData) {
+    try {
+      // Найдите и обновите пост
+      const updatedPost = await Post.findByIdAndUpdate(id, postData, {
+        new: true,
+      }); // { new: true } вернёт обновлённый документ
+      if (!updatedPost) {
+        throw new Error("Пост не найден");
+      }
+      return updatedPost;
+    } catch (e) {
+      console.error("Ошибка при обновлении поста:", e);
+      throw e; // Пробрасываем ошибку выше
     }
-    const updatedPost = await Post.findByIdAndUpdate(post._id, post, {
-      new: true,
-    });
-    return updatedPost;
   }
 
   async delete(id) {
