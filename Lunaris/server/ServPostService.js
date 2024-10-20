@@ -8,20 +8,18 @@ class PostService {
     return post;
   }
 
-  async getAll(limit = 10, page = 1, sort = "id", order = "asc") {
-    console.log(
-      `Параметры запроса: limit=${limit}, page=${page}, sort=${sort}, order=${order}`
-    );
-
-    const sortOrder = order === "desc" ? -1 : 1;
-
+  async getAll(limit, page, sort, order) {
+    const offset = (page - 1) * limit; // Вычисляем смещение для пагинации
     const posts = await Post.find()
-      .sort({ [sort]: sortOrder })
-      .limit(limit)
-      .skip((page - 1) * limit);
-
-    console.log("Полученные посты:", posts);
+      .sort({ [sort]: order === "desc" ? -1 : 1 }) // Сортировка по полю
+      .skip(offset) // Пропустить посты для текущей страницы
+      .limit(limit); // Ограничение количества постов
     return posts;
+  }
+
+  // Получение общего количества постов
+  async getTotalCount() {
+    return await Post.countDocuments();
   }
 
   async getOne(id) {

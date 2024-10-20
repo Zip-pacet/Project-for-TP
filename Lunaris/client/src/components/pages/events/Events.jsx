@@ -19,7 +19,7 @@ function Events() {
   const [posts, setPosts] = useState([]);
   const [filter, setFilter] = useState({ sort: "", query: "" });
   const [totalPages, setTotalPages] = useState(0);
-  const [limit, setLimit] = useState(10);
+  const [limit, setLimit] = useState(5);
   const [page, setPage] = useState(() => {
     const savedPage = localStorage.getItem("currentPage");
     return savedPage ? JSON.parse(savedPage) : 1; // Default to page 1 if no saved page
@@ -31,8 +31,19 @@ function Events() {
     async (limit, page) => {
       const response = await PostService.getAll(limit, page);
       setPosts(response.data);
+
+      // Проверка на наличие заголовка
       const totalCount = response.headers["x-total-count"];
-      setTotalPages(getPageCount(totalCount, limit));
+      console.log("Total Count from Headers:", totalCount); // Это должно выводить количество
+
+      if (totalCount) {
+        setTotalPages(getPageCount(totalCount, limit));
+      } else {
+        console.error(
+          "Заголовок 'x-total-count' отсутствует в ответе сервера."
+        );
+        setTotalPages(1); // Устанавливаем 0 страниц, если заголовок отсутствует
+      }
     }
   );
 

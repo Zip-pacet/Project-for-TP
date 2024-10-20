@@ -30,24 +30,23 @@ class PostController {
 
   async getAll(req, res) {
     try {
-      // Извлекаем параметры запроса
-      const limit = parseInt(req.query._limit) || 10; // По умолчанию 10
-      const page = parseInt(req.query._page) || 1; // По умолчанию 1
-      const sort = req.query._sort || "id"; // По умолчанию по id
-      const order = req.query._order === "desc" ? "desc" : "asc"; // Сортировка по убыванию или возрастанию
+      const limit = parseInt(req.query._limit) || 5;
+      const page = parseInt(req.query._page) || 1;
+      const sort = req.query._sort || "id";
+      const order = req.query._order === "desc" ? "desc" : "asc";
 
       console.log(
         `Получение постов: limit=${limit}, page=${page}, sort=${sort}, order=${order}`
       );
 
-      // Получаем посты из сервиса
       const posts = await PostService.getAll(limit, page, sort, order);
+      const totalCount = await PostService.getTotalCount();
 
-      console.log("Посты получены:", posts);
+      res.set("x-total-count", totalCount.toString());
       return res.json(posts);
     } catch (e) {
       console.error("Ошибка при получении постов:", e);
-      res
+      return res
         .status(500)
         .json({ message: "Ошибка получения постов", error: e.message });
     }

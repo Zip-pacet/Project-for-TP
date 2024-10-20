@@ -9,7 +9,11 @@ const DB_URL =
   "mongodb+srv://user:lunaris1@cluster0.m3yuu.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0";
 const app = express();
 
-app.use(cors());
+app.use(
+  cors({
+    exposedHeaders: ["x-total-count"], // Указываем, что заголовок 'x-total-count' должен быть видимым на стороне клиента
+  })
+);
 
 app.use(express.json());
 app.use(express.static("static"));

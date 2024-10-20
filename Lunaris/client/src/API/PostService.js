@@ -1,7 +1,7 @@
 import axios from "axios";
 
 export default class PostService {
-  static async getAll(limit = 10, page = 1) {
+  static async getAll(limit = 5, page = 1) {
     console.log(
       `Запрос к API: http://localhost:3001/posts?_limit=${limit}&_page=${page}&_sort=id&_order=desc`
     );
@@ -16,7 +16,8 @@ export default class PostService {
         },
       });
       console.log("Ответ от API:", response.data);
-      return response.data; // Вернем только данные
+      console.log("Заголовки ответа:", response.headers);
+      return response; // Вернем только данные
     } catch (error) {
       console.error(
         "Ошибка при получении постов:",
