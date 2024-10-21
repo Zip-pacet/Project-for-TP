@@ -17,7 +17,7 @@ const PostItem = (props) => {
         <div className='post__content'>
           {/*<strong>{props.post.id}</strong>*/}
           <div className='post__title'>{props.post.title}</div>
-          <div className='post__body'>{props.post.body}</div>
+          <div className='post__body'>{props.post.subtitle}</div>
           <div className='post__btns'>
             {isAuth ? (
               <div>
@@ -39,9 +39,14 @@ const PostItem = (props) => {
         <div className='post__content'>
           <img
             className='post__img'
-            src={props.post.image || placeholderImage}
+            src={"http://localhost:3001/" + props.post.picture}
             alt={props.post.title}
-          ></img>
+            onError={(e) => {
+              e.target.onerror = null; // предотвратить бесконечный цикл
+              e.target.src = placeholderImage; // показываем запасное изображение
+              console.error("Image failed to load:", props.post.picture);
+            }}
+          />
         </div>
       </div>
     </div>

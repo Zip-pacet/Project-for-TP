@@ -1,5 +1,6 @@
-import React, { useState, useMemo } from "react";
+import React, { useMemo } from "react";
 
+// Хук для сортировки постов
 export const useSortedPosts = (posts, sort) => {
   const sortedPosts = useMemo(() => {
     if (sort) {
@@ -10,13 +11,18 @@ export const useSortedPosts = (posts, sort) => {
 
   return sortedPosts;
 };
-export const usePosts = (posts, sort, query) => {
+
+// Хук для фильтрации и сортировки постов
+export const usePosts = (posts = [], sort, query) => {
+  // Добавлена инициализация posts как пустого массива
   const sortedPosts = useSortedPosts(posts, sort);
 
   const sortedAndSearchedPosts = useMemo(() => {
-    return sortedPosts.filter((post) =>
-      post.title.toLowerCase().includes(query)
+    return sortedPosts.filter(
+      (post) =>
+        post.title && post.title.toLowerCase().includes(query.toLowerCase()) // Проверка на наличие title
     );
   }, [query, sortedPosts]);
+
   return sortedAndSearchedPosts;
 };

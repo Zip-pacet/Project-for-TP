@@ -50,7 +50,7 @@
   padding-top: 30px;
 }
 .post__img {
-  min-width: 300px;
+  max-width: 300px;
   height: auto;
   margin: 0px 20px;
   border: 1px solid #fff299;
