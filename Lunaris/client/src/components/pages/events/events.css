@@ -51,7 +51,7 @@
 }
 .post__img {
   max-width: 300px;
-  height: auto;
+  max-height: 200px;
   margin: 0px 20px;
   border: 1px solid #fff299;
   border-radius: 16px;

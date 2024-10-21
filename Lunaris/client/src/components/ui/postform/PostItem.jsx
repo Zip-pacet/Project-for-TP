@@ -39,7 +39,7 @@ const PostItem = (props) => {
         <div className='post__content'>
           <img
             className='post__img'
-            src={"http://localhost:3001/" + props.post.picture}
+            src={"http://backend:3001/" + props.post.picture}
             alt={props.post.title}
             onError={(e) => {
               e.target.onerror = null; // предотвратить бесконечный цикл

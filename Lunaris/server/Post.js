@@ -1,10 +1,22 @@
-import mongoose from "mongoose";
+import { DataTypes } from "sequelize";
+import sequelize from "./database.js";
 
-const Post = new mongoose.Schema({
-  title: { type: String, required: true },
-  subtitle: { type: String, required: true },
-  body: { type: String, required: true },
-  picture: { type: String },
+const Post = sequelize.define("Post", {
+  title: {
+    type: DataTypes.STRING,
+    allowNull: false,
+  },
+  subtitle: {
+    type: DataTypes.STRING,
+    allowNull: false,
+  },
+  body: {
+    type: DataTypes.TEXT,
+    allowNull: false,
+  },
+  picture: {
+    type: DataTypes.STRING,
+  },
 });
 
-export default mongoose.model("Post", Post);
+export default Post; // Экспорт модели
