@@ -6,7 +6,7 @@ import Loader from "../../ui/loader/Loader";
 import "./postPage.css"; // Import the CSS
 
 const PostPage = () => {
-  const params = useParams();
+  // const params = useParams();
   const [post, setPost] = useState({});
   const [images, setImages] = useState([]); // Now handling multiple images
 
@@ -24,14 +24,13 @@ const PostPage = () => {
   });
 
   useEffect(() => {
-    fetchPostById(params.id); // Fetch the post
-    fetchImagesById(params.id); // Fetch multiple images (simulated)
-  }, [params.id]);
+    fetchPostById("67154375f1e5c9c0aa50adc6"); // Fetch the post
+  }, []);
 
   return (
     <div className='view-post'>
       <div className='post-page'>
-        <h1>Страница с новостью ID = {params.id}</h1>
+        <h1>Страница с новостью ID = {}</h1>
 
         {isLoading ? (
           <div className='loader-container'>
