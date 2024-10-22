@@ -1,42 +1,72 @@
-import Post from "./Post.js";
+import pool from "./db.js";
 
 class PostService {
   async create(postData) {
-    const { title, content, picture } = postData;
-    const post = await Post.create({ title, content, picture });
-    return post;
+    const { title, description, body, image } = postData;
+
+    const query = `
+      INSERT INTO posts (title, description, body, image)
+      VALUES ($1, $2, $3, $4) RETURNING *;`;
+
+    const newPost = await pool.query(query, [title, description, body, image]);
+
+    return newPost.rows[0]; // Возвращаем созданный пост
   }
 
   async getAll(limit, page, sort, order) {
     const offset = (page - 1) * limit;
-    const posts = await Post.findAll({
-      limit,
-      offset,
-      order: [[sort, order]],
-    });
-    return posts;
+
+    const query = `
+      SELECT * FROM posts
+      ORDER BY ${sort} ${order}
+      LIMIT $1 OFFSET $2;`;
+
+    const posts = await pool.query(query, [limit, offset]);
+
+    return posts.rows; // Возвращаем посты
   }
 
   async getTotalCount() {
-    const count = await Post.count();
-    return count;
+    const query = "SELECT COUNT(*) FROM posts;";
+
+    const result = await pool.query(query);
+
+    return parseInt(result.rows[0].count); // Возвращаем количество постов
   }
 
   async getOne(id) {
-    const post = await Post.findByPk(id);
-    return post;
+    const query = "SELECT * FROM posts WHERE id = $1;";
+
+    const post = await pool.query(query, [id]);
+
+    return post.rows[0]; // Возвращаем найденный пост или undefined, если не найден
   }
 
   async update(id, postData) {
-    const { title, content, picture } = postData;
-    await Post.update({ title, content, picture }, { where: { id } });
-    return this.getOne(id);
+    const { title, description, body, image } = postData;
+
+    const query = `
+      UPDATE posts 
+      SET title = $1, description = $2, body = $3, image = $4 
+      WHERE id = $5 RETURNING *;`;
+
+    const updatedPost = await pool.query(query, [
+      title,
+      description,
+      body,
+      image,
+      id,
+    ]);
+
+    return updatedPost.rows[0]; // Возвращаем обновленный пост или undefined, если не найден
   }
 
   async delete(id) {
-    const post = await this.getOne(id);
-    await Post.destroy({ where: { id } });
-    return post;
+    const query = "DELETE FROM posts WHERE id = $1 RETURNING *;";
+
+    const deletedPost = await pool.query(query, [id]);
+
+    return deletedPost.rows[0]; // Возвращаем удаленный пост или undefined, если не найден
   }
 }
 
