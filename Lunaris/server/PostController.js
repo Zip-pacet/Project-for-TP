@@ -36,13 +36,9 @@ class PostController {
         _order = "ASC",
       } = req.query;
 
-      // Получаем посты с пагинацией
       const posts = await PostService.getAll(_limit, _page, _sort, _order);
-
-      // Получаем общее количество постов
       const totalCount = await PostService.getTotalCount();
 
-      // Возвращаем массив постов и общее количество
       return res.json({
         posts,
         totalCount,
@@ -76,23 +72,31 @@ class PostController {
 
   async update(req, res) {
     try {
-      if (!req.params.id) {
+      const postId = req.params.id;
+
+      if (!postId) {
         return res.status(400).json({ message: "ID поста не указан" });
       }
-      if (!req.body) {
-        return res.status(400).json({ message: "Нет данных для обновления" });
+
+      const existingPost = await PostService.getOne(postId);
+      if (!existingPost) {
+        return res.status(404).json({ message: "Пост не найден" });
       }
 
       let pictureName;
+
       if (req.files && req.files.image) {
+        // Save the new image and delete the old one
         pictureName = await FileService.saveFile(req.files.image);
+        // Optionally delete the old image
+        await FileService.deleteFile(existingPost.image);
         req.body.image = pictureName;
       }
 
-      const updatedPost = await PostService.update(req.params.id, req.body);
-      if (!updatedPost) {
-        return res.status(404).json({ message: "Пост не найден" });
-      }
+      const updatedPost = await PostService.update(postId, {
+        ...req.body,
+        image: pictureName ? pictureName : existingPost.image, // Preserve old image if no new image is uploaded
+      });
 
       console.log("Обновленный пост:", updatedPost);
       return res.json(updatedPost);
@@ -113,6 +117,9 @@ class PostController {
       if (!post) {
         return res.status(404).json({ message: "Пост не найден" });
       }
+
+      // Optionally delete the associated image file
+      await FileService.deleteFile(post.image);
 
       console.log("Пост удален:", post);
       return res.json({ message: "Пост удален" });

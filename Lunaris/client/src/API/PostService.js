@@ -46,10 +46,10 @@ export default class PostService {
     try {
       const response = await axios.post(
         "http://localhost:3001/api/posts",
-        postData, // postData is expected to be FormData
+        postData,
         {
           headers: {
-            "Content-Type": "multipart/form-data", // Set the content type to multipart/form-data
+            "Content-Type": "multipart/form-data",
           },
         }
       );
@@ -58,6 +58,30 @@ export default class PostService {
     } catch (error) {
       console.error(
         "Ошибка при создании поста:",
+        error.response?.data || error.message
+      );
+      throw error;
+    }
+  }
+
+  static async updatePost(id, postData) {
+    console.log(`Обновление поста с ID: ${id} и данными:`, postData);
+
+    try {
+      const response = await axios.put(
+        `http://localhost:3001/api/posts/${id}`,
+        postData,
+        {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        }
+      );
+      console.log("Ответ от API на обновление поста:", response.data);
+      return response.data;
+    } catch (error) {
+      console.error(
+        `Ошибка при обновлении поста с ID ${id}:`,
         error.response?.data || error.message
       );
       throw error;

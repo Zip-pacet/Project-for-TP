@@ -86,3 +86,37 @@
   justify-content: center;
   margin-top: 20px;
 }
+
+.edit-post {
+  background-color: rgba(255, 255, 255, 0.1);
+  border: 1px solid #fff299;
+  border-radius: 16px;
+  padding: 20px;
+  margin: 20px auto;
+  max-width: 80%;
+  color: #e6e6e6;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.edit-input,
+.edit-textarea {
+  width: 100%;
+  background-color: transparent;
+  border: 1px solid #fff299;
+  border-radius: 8px;
+  padding: 10px;
+  margin-bottom: 20px;
+  color: #e6e6e6;
+  font-size: 18px;
+}
+
+.edit-input:focus,
+.edit-textarea:focus {
+  outline: none;
+  border-color: #fff;
+}
+
+.edit-textarea {
+  min-height: 100px;
+  resize: vertical;
+}
