@@ -1,5 +1,5 @@
 import pkg from "pg";
-const { Pool } = pkg; // Используем деструктуризацию из CommonJS импорта
+const { Pool } = pkg;
 
 const pool = new Pool({
   user: "postgres",

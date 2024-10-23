@@ -17,7 +17,7 @@ const PostItem = (props) => {
         <div className='post__content'>
           {/*<strong>{props.post.id}</strong>*/}
           <div className='post__title'>{props.post.title}</div>
-          <div className='post__body'>{props.post.subtitle}</div>
+          <div className='post__body'>{props.post.description}</div>
           <div className='post__btns'>
             {isAuth ? (
               <div>
