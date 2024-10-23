@@ -2,12 +2,8 @@ import axios from "axios";
 
 export default class PostService {
   static async getAll(limit = 5, page = 1) {
-    console.log(
-      `Запрос к API: http://backend:3001/posts?_limit=${limit}&_page=${page}&_sort=id&_order=desc`
-    );
-
     try {
-      const response = await axios.get("http://backend:3001/api/posts", {
+      const response = await axios.get("http://localhost:3001/api/posts", {
         params: {
           _limit: limit,
           _page: page,
@@ -15,9 +11,14 @@ export default class PostService {
           _order: "desc",
         },
       });
-      console.log("Ответ от API:", response.data);
-      console.log("Заголовки ответа:", response.headers);
-      return response;
+
+      const { posts, totalCount, currentPage, totalPages } = response.data;
+
+      console.log("Общее количество постов:", totalCount);
+      console.log("Текущая страница:", currentPage);
+      console.log("Общее количество страниц:", totalPages);
+
+      return response.data;
     } catch (error) {
       console.error(
         "Ошибка при получении постов:",
@@ -31,7 +32,7 @@ export default class PostService {
     console.log(`Запрос на получение поста с ID: ${id}`);
 
     try {
-      const response = await axios.get(`http://backend:3001/api/posts/${id}`);
+      const response = await axios.get(`http://localhost:3001/api/posts/${id}`);
       console.log("Ответ от API на получение поста:", response.data);
       return response.data;
     } catch (error) {
@@ -47,7 +48,7 @@ export default class PostService {
     console.log("Создание поста с данными:", postData);
 
     const response = await axios.post(
-      "http://backend:3001/api/posts",
+      "http://localhost:3001/api/posts",
       postData
     );
     console.log("Ответ от API на создание поста:", response.data);

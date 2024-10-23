@@ -1,4 +1,5 @@
 import pool from "./db.js";
+import FileService from "./fileService.js";
 
 class PostService {
   async create(postData) {
@@ -10,7 +11,7 @@ class PostService {
 
     const newPost = await pool.query(query, [title, description, body, image]);
 
-    return newPost.rows[0]; // Возвращаем созданный пост
+    return newPost.rows[0];
   }
 
   async getAll(limit, page, sort, order) {
@@ -23,7 +24,7 @@ class PostService {
 
     const posts = await pool.query(query, [limit, offset]);
 
-    return posts.rows; // Возвращаем посты
+    return posts.rows;
   }
 
   async getTotalCount() {
@@ -31,7 +32,7 @@ class PostService {
 
     const result = await pool.query(query);
 
-    return parseInt(result.rows[0].count); // Возвращаем количество постов
+    return parseInt(result.rows[0].count);
   }
 
   async getOne(id) {
@@ -39,7 +40,7 @@ class PostService {
 
     const post = await pool.query(query, [id]);
 
-    return post.rows[0]; // Возвращаем найденный пост или undefined, если не найден
+    return post.rows[0];
   }
 
   async update(id, postData) {
@@ -58,15 +59,24 @@ class PostService {
       id,
     ]);
 
-    return updatedPost.rows[0]; // Возвращаем обновленный пост или undefined, если не найден
+    return updatedPost.rows[0];
   }
 
   async delete(id) {
-    const query = "DELETE FROM posts WHERE id = $1 RETURNING *;";
+    const querySelect = "SELECT image FROM posts WHERE id = $1;";
+    const post = await pool.query(querySelect, [id]);
+    const postImage = post.rows[0]?.image;
 
-    const deletedPost = await pool.query(query, [id]);
+    if (!postImage) {
+      return null;
+    }
 
-    return deletedPost.rows[0]; // Возвращаем удаленный пост или undefined, если не найден
+    await FileService.deleteFile(postImage);
+
+    const queryDelete = "DELETE FROM posts WHERE id = $1 RETURNING *;";
+    const deletedPost = await pool.query(queryDelete, [id]);
+
+    return deletedPost.rows[0];
   }
 }
 

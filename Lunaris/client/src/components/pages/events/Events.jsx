@@ -30,20 +30,10 @@ function Events() {
   const [fetchPosts, arePostsLoading, postError] = useFetching(
     async (limit, page) => {
       const response = await PostService.getAll(limit, page);
-      setPosts(response.data);
+      setPosts(response.posts); // Теперь данные о постах находятся в поле 'posts'
 
-      // Проверка на наличие заголовка
-      const totalCount = response.headers["x-total-count"];
-      console.log("Total Count from Headers:", totalCount); // Это должно выводить количество
-
-      if (totalCount) {
-        setTotalPages(getPageCount(totalCount, limit));
-      } else {
-        console.error(
-          "Заголовок 'x-total-count' отсутствует в ответе сервера."
-        );
-        setTotalPages(1); // Устанавливаем 0 страниц, если заголовок отсутствует
-      }
+      const totalCount = response.totalCount; // Получаем общее количество постов из тела ответа
+      setTotalPages(getPageCount(totalCount, limit)); // Рассчитываем общее количество страниц
     }
   );
 
@@ -55,7 +45,6 @@ function Events() {
     localStorage.setItem("currentPage", JSON.stringify(page)); // Save current page to local storage
   }, [page]);
 
-  // Updated createPost to use PostService.createPost
   const createPost = async (newPost) => {
     try {
       const response = await PostService.createPost(newPost);

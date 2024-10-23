@@ -29,25 +29,28 @@ class PostController {
 
   async getAll(req, res) {
     try {
-      const limit = parseInt(req.query._limit) || 5;
-      const page = parseInt(req.query._page) || 1;
-      const sort = req.query._sort || "id";
-      const order = req.query._order === "desc" ? "desc" : "asc";
+      const {
+        _limit = 10,
+        _page = 1,
+        _sort = "id",
+        _order = "ASC",
+      } = req.query;
 
-      console.log(
-        `Получение постов: limit=${limit}, page=${page}, sort=${sort}, order=${order}`
-      );
+      // Получаем посты с пагинацией
+      const posts = await PostService.getAll(_limit, _page, _sort, _order);
 
-      const posts = await PostService.getAll(limit, page, sort, order);
+      // Получаем общее количество постов
       const totalCount = await PostService.getTotalCount();
 
-      res.set("x-total-count", totalCount.toString());
-      return res.json(posts);
-    } catch (e) {
-      console.error("Ошибка при получении постов:", e);
-      return res
-        .status(500)
-        .json({ message: "Ошибка получения постов", error: e.message });
+      // Возвращаем массив постов и общее количество
+      return res.json({
+        posts,
+        totalCount,
+        currentPage: parseInt(_page),
+        totalPages: Math.ceil(totalCount / _limit),
+      });
+    } catch (error) {
+      return res.status(500).json({ message: "Ошибка при получении постов" });
     }
   }
 

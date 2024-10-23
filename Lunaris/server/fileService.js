@@ -7,12 +7,21 @@ class FileService {
     try {
       const fileName = uuid.v4() + ".jpg";
       const filePath = path.resolve("static", fileName);
-
       await file.mv(filePath);
-
       return fileName;
     } catch (e) {
       throw new Error("Ошибка при сохранении файла");
+    }
+  }
+
+  async deleteFile(fileName) {
+    try {
+      const filePath = path.resolve("static", fileName);
+      await fs.unlink(filePath);
+    } catch (e) {
+      console.warn(
+        `Не удалось удалить файл: ${fileName}, возможно, он уже был удалён`
+      );
     }
   }
 }
