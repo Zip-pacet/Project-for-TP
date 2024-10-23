@@ -4,7 +4,7 @@ import React, { useMemo } from "react";
 export const useSortedPosts = (posts, sort) => {
   const sortedPosts = useMemo(() => {
     if (sort) {
-      return [...posts].sort((a, b) => a[sort].localeCompare(b[sort]));
+      return [...posts].sort((a, b) => a[sort]?.localeCompare(b[sort])); // Optional chaining
     }
     return posts;
   }, [sort, posts]);
@@ -14,13 +14,12 @@ export const useSortedPosts = (posts, sort) => {
 
 // Хук для фильтрации и сортировки постов
 export const usePosts = (posts = [], sort, query) => {
-  // Добавлена инициализация posts как пустого массива
   const sortedPosts = useSortedPosts(posts, sort);
 
   const sortedAndSearchedPosts = useMemo(() => {
     return sortedPosts.filter(
       (post) =>
-        post.title && post.title.toLowerCase().includes(query.toLowerCase()) // Проверка на наличие title
+        post?.title && post.title.toLowerCase().includes(query.toLowerCase()) // Optional chaining
     );
   }, [query, sortedPosts]);
 

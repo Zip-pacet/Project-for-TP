@@ -30,15 +30,14 @@ function Events() {
   const [fetchPosts, arePostsLoading, postError] = useFetching(
     async (limit, page) => {
       const response = await PostService.getAll(limit, page);
-      setPosts(response.posts); // Теперь данные о постах находятся в поле 'posts'
-
-      const totalCount = response.totalCount; // Получаем общее количество постов из тела ответа
-      setTotalPages(getPageCount(totalCount, limit)); // Рассчитываем общее количество страниц
+      setPosts(response.posts); // Update posts with response data
+      const totalCount = response.totalCount; // Get total post count
+      setTotalPages(getPageCount(totalCount, limit)); // Calculate total pages
     }
   );
 
   useEffect(() => {
-    fetchPosts(limit, page);
+    fetchPosts(limit, page); // Fetch posts on initial render and when limit/page changes
   }, [limit, page]);
 
   useEffect(() => {
@@ -47,22 +46,26 @@ function Events() {
 
   const createPost = async (newPost) => {
     try {
-      const response = await PostService.createPost(newPost);
-      setPage(1);
-      setPosts([response.data, ...posts]);
-      setModal(false);
+      await PostService.createPost(newPost); // Create new post
+      setModal(false); // Close modal
+      await fetchPosts(limit, page); // Refresh posts after creation
     } catch (error) {
       console.error("Error creating post:", error);
     }
   };
 
-  const removePost = (post) => {
-    setPosts(posts.filter((p) => p.id !== post.id));
+  const removePost = async (post) => {
+    try {
+      await PostService.deletePost(post.id); // Delete post via API
+      setPosts(posts.filter((p) => p.id !== post.id)); // Update local state
+    } catch (error) {
+      console.error("Ошибка при удалении поста:", error);
+    }
   };
 
   const changePage = (newPage) => {
     setPage(newPage);
-    fetchPosts(limit, newPage);
+    fetchPosts(limit, newPage); // Fetch posts for new page
   };
 
   return (

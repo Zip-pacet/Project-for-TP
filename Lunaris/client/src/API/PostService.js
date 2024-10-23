@@ -14,10 +14,6 @@ export default class PostService {
 
       const { posts, totalCount, currentPage, totalPages } = response.data;
 
-      console.log("Общее количество постов:", totalCount);
-      console.log("Текущая страница:", currentPage);
-      console.log("Общее количество страниц:", totalPages);
-
       return response.data;
     } catch (error) {
       console.error(
@@ -47,11 +43,42 @@ export default class PostService {
   static async createPost(postData) {
     console.log("Создание поста с данными:", postData);
 
-    const response = await axios.post(
-      "http://localhost:3001/api/posts",
-      postData
-    );
-    console.log("Ответ от API на создание поста:", response.data);
-    return response.data;
+    try {
+      const response = await axios.post(
+        "http://localhost:3001/api/posts",
+        postData, // postData is expected to be FormData
+        {
+          headers: {
+            "Content-Type": "multipart/form-data", // Set the content type to multipart/form-data
+          },
+        }
+      );
+      console.log("Ответ от API на создание поста:", response.data);
+      return response.data;
+    } catch (error) {
+      console.error(
+        "Ошибка при создании поста:",
+        error.response?.data || error.message
+      );
+      throw error;
+    }
+  }
+
+  static async deletePost(id) {
+    console.log(`Запрос на удаление поста с ID: ${id}`);
+
+    try {
+      const response = await axios.delete(
+        `http://localhost:3001/api/posts/${id}`
+      );
+      console.log("Ответ от API на удаление поста:", response.data);
+      return response.data;
+    } catch (error) {
+      console.error(
+        `Ошибка при удалении поста с ID ${id}:`,
+        error.response?.data || error.message
+      );
+      throw error;
+    }
   }
 }

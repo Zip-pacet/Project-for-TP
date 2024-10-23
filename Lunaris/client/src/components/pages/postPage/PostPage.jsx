@@ -2,30 +2,33 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import PostService from "../../../API/PostService";
 import { useFetching } from "../../hooks/useFetching";
+import { useNavigate } from "react-router-dom";
 import Loader from "../../ui/loader/Loader";
-import "./postPage.css"; // Import the CSS
+import "./postPage.css";
+import MyButton from "../../ui/button/MyButton";
 
 const PostPage = () => {
   const params = useParams();
-
   const [post, setPost] = useState({});
+  const navigate = useNavigate();
 
-  // Fetching post by ID
   const [fetchPostById, isLoading, postError] = useFetching(async (id) => {
-    console.log("доходит ли id " + params.id);
-
     const response = await PostService.getById(params.id);
     setPost(response);
   });
 
   useEffect(() => {
-    fetchPostById(params.id); // Fetch the post
+    fetchPostById(params.id);
   }, [params.id]);
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
   return (
     <div className='view-post'>
       <div className='post-page'>
-        <h1>Страница с новостью ID = {params.id}</h1>
+        <h1 className='post-title'>{post.title}</h1>
 
         {isLoading ? (
           <div className='loader-container'>
@@ -33,7 +36,20 @@ const PostPage = () => {
           </div>
         ) : (
           <div className='post-content'>
-            {post.id}. {post.title}. {post.body}. {post.image}
+            <div className='post-text'>
+              <h2 className='post-subtitle'>{post.description}</h2>
+              <p className='post-body'>{post.body}</p>
+              {post.image && (
+                <div className='post-image-container'>
+                  <img
+                    src={`http://localhost:3001/${post.image}`}
+                    alt={post.title}
+                    className='post-image'
+                  />
+                </div>
+              )}
+              <MyButton onClick={() => navigate(`/events`)}>Назад</MyButton>
+            </div>
           </div>
         )}
 
