@@ -2,12 +2,8 @@ import axios from "axios";
 
 export default class PostService {
   static async getAll(limit = 5, page = 1) {
-    console.log(
-      `Запрос к API: http://backend:3001/posts?_limit=${limit}&_page=${page}&_sort=id&_order=desc`
-    );
-
     try {
-      const response = await axios.get("http://backend:3001/api/posts", {
+      const response = await axios.get("http://server:3001/api/posts", {
         params: {
           _limit: limit,
           _page: page,
@@ -15,9 +11,10 @@ export default class PostService {
           _order: "desc",
         },
       });
-      console.log("Ответ от API:", response.data);
-      console.log("Заголовки ответа:", response.headers);
-      return response;
+
+      const { posts, totalCount, currentPage, totalPages } = response.data;
+
+      return response.data;
     } catch (error) {
       console.error(
         "Ошибка при получении постов:",
@@ -31,7 +28,7 @@ export default class PostService {
     console.log(`Запрос на получение поста с ID: ${id}`);
 
     try {
-      const response = await axios.get(`http://backend:3001/api/posts/${id}`);
+      const response = await axios.get(`http://server:3001/api/posts/${id}`);
       console.log("Ответ от API на получение поста:", response.data);
       return response.data;
     } catch (error) {
@@ -46,11 +43,64 @@ export default class PostService {
   static async createPost(postData) {
     console.log("Создание поста с данными:", postData);
 
-    const response = await axios.post(
-      "http://backend:3001/api/posts",
-      postData
-    );
-    console.log("Ответ от API на создание поста:", response.data);
-    return response.data;
+    try {
+      const response = await axios.post(
+        "http://server:3001/api/posts",
+        postData,
+        {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        }
+      );
+      console.log("Ответ от API на создание поста:", response.data);
+      return response.data;
+    } catch (error) {
+      console.error(
+        "Ошибка при создании поста:",
+        error.response?.data || error.message
+      );
+      throw error;
+    }
+  }
+
+  static async updatePost(id, postData) {
+    console.log(`Обновление поста с ID: ${id} и данными:`, postData);
+
+    try {
+      const response = await axios.put(
+        `http://server:3001/api/posts/${id}`,
+        postData,
+        {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        }
+      );
+      console.log("Ответ от API на обновление поста:", response.data);
+      return response.data;
+    } catch (error) {
+      console.error(
+        `Ошибка при обновлении поста с ID ${id}:`,
+        error.response?.data || error.message
+      );
+      throw error;
+    }
+  }
+
+  static async deletePost(id) {
+    console.log(`Запрос на удаление поста с ID: ${id}`);
+
+    try {
+      const response = await axios.delete(`http://server:3001/api/posts/${id}`);
+      console.log("Ответ от API на удаление поста:", response.data);
+      return response.data;
+    } catch (error) {
+      console.error(
+        `Ошибка при удалении поста с ID ${id}:`,
+        error.response?.data || error.message
+      );
+      throw error;
+    }
   }
 }

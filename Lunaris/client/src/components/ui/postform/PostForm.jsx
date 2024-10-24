@@ -1,22 +1,35 @@
-import React, { useState } from "react"; // Added useState import
+import React, { useState } from "react";
 import MyButton from "../button/MyButton";
 import MyInput from "../input/MyInput";
 
 const PostForm = ({ create }) => {
-  const [post, setPost] = useState({ title: "", body: "" });
+  const [post, setPost] = useState({
+    title: "",
+    description: "",
+    body: "",
+    image: null,
+  });
 
-  const addNewPost = (e) => {
+  const addNewPost = async (e) => {
     e.preventDefault();
-    const newPost = {
-      ...post,
-      id: Date.now(),
-    };
-    create(newPost);
-    setPost({ title: "", body: "", image: "" });
+    try {
+      const formData = new FormData();
+      formData.append("title", post.title);
+      formData.append("description", post.description);
+      formData.append("body", post.body);
+      if (post.image) {
+        formData.append("image", post.image);
+      }
+
+      await create(formData);
+      setPost({ title: "", description: "", body: "", image: null });
+    } catch (error) {
+      console.error("Ошибка при создании поста:", error);
+    }
   };
 
   return (
-    <form>
+    <form onSubmit={addNewPost}>
       <MyInput
         value={post.title}
         onChange={(e) => setPost({ ...post, title: e.target.value })}
@@ -24,18 +37,23 @@ const PostForm = ({ create }) => {
         placeholder='Заголовок новости'
       />
       <MyInput
+        value={post.description}
+        onChange={(e) => setPost({ ...post, description: e.target.value })}
+        type='text'
+        placeholder='Подзаголовок новости'
+      />
+      <MyInput
         value={post.body}
         onChange={(e) => setPost({ ...post, body: e.target.value })}
         type='text'
         placeholder='Содержание новости'
       />
-      <MyInput
-        value={post.image}
-        onChange={(e) => setPost({ ...post, image: e.target.value })}
-        type='text'
-        placeholder='URL изображения'
+      <input
+        type='file'
+        accept='image/*'
+        onChange={(e) => setPost({ ...post, image: e.target.files[0] })}
       />
-      <MyButton onClick={addNewPost}>Создать новость</MyButton>
+      <MyButton type='submit'>Создать новость</MyButton>
     </form>
   );
 };

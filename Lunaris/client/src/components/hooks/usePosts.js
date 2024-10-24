@@ -14,7 +14,6 @@ export const useSortedPosts = (posts, sort) => {
 
 // Хук для фильтрации и сортировки постов
 export const usePosts = (posts = [], sort, query) => {
-  // Добавлена инициализация posts как пустого массива
   const sortedPosts = useSortedPosts(posts, sort);
 
   const sortedAndSearchedPosts = useMemo(() => {

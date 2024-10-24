@@ -1,5 +1,4 @@
-import React, { useState, useMemo, useEffect, useContext } from "react";
-import { Link } from "react-router-dom";
+import React, { useState, useEffect, useContext, useRef } from "react";
 import "./events.css";
 import PostList from "../../ui/postform/PostList";
 import PostForm from "../../ui/postform/PostForm";
@@ -11,70 +10,71 @@ import PostService from "../../../API/PostService";
 import Loader from "../../ui/loader/Loader";
 import { useFetching } from "../../hooks/useFetching";
 import { getPageCount } from "../../../utils/pages";
-import Pagination from "../../ui/pagination/Pagination";
 import { AuthContext } from "../../../context";
 
 function Events() {
   const { isAuth } = useContext(AuthContext);
-  const [posts, setPosts] = useState([]);
+  const [allPosts, setAllPosts] = useState([]);
   const [filter, setFilter] = useState({ sort: "", query: "" });
   const [totalPages, setTotalPages] = useState(0);
   const [limit, setLimit] = useState(5);
-  const [page, setPage] = useState(() => {
-    const savedPage = localStorage.getItem("currentPage");
-    return savedPage ? JSON.parse(savedPage) : 1; // Default to page 1 if no saved page
-  });
+  const [page, setPage] = useState(1); // Убрали логику с localStorage
   const [modal, setModal] = useState(false);
-  const sortedAndSearchedPosts = usePosts(posts, filter.sort, filter.query);
+  const lastElement = useRef();
+  const observer = useRef();
 
   const [fetchPosts, arePostsLoading, postError] = useFetching(
     async (limit, page) => {
       const response = await PostService.getAll(limit, page);
-      setPosts(response.data);
-
-      // Проверка на наличие заголовка
-      const totalCount = response.headers["x-total-count"];
-      console.log("Total Count from Headers:", totalCount); // Это должно выводить количество
-
-      if (totalCount) {
-        setTotalPages(getPageCount(totalCount, limit));
-      } else {
-        console.error(
-          "Заголовок 'x-total-count' отсутствует в ответе сервера."
+      setAllPosts((prevPosts) => {
+        const newPosts = response.posts.filter(
+          (post) => !prevPosts.find((p) => p.id === post.id)
         );
-        setTotalPages(1); // Устанавливаем 0 страниц, если заголовок отсутствует
-      }
+        return [...prevPosts, ...newPosts];
+      });
+      const totalCount = response.totalCount;
+      setTotalPages(getPageCount(totalCount, limit));
     }
   );
+
+  useEffect(() => {
+    if (arePostsLoading) return;
+    if (observer.current) observer.current.disconnect();
+
+    const callback = function (entries) {
+      if (entries[0].isIntersecting && page < totalPages) {
+        setPage((prevPage) => prevPage + 1); // Увеличиваем страницу
+      }
+    };
+
+    observer.current = new IntersectionObserver(callback);
+    observer.current.observe(lastElement.current);
+  }, [arePostsLoading]);
 
   useEffect(() => {
     fetchPosts(limit, page);
   }, [limit, page]);
 
-  useEffect(() => {
-    localStorage.setItem("currentPage", JSON.stringify(page)); // Save current page to local storage
-  }, [page]);
-
-  // Updated createPost to use PostService.createPost
   const createPost = async (newPost) => {
     try {
-      const response = await PostService.createPost(newPost);
-      setPage(1);
-      setPosts([response.data, ...posts]);
+      const createdPost = await PostService.createPost(newPost);
+      setAllPosts((prevPosts) => [createdPost, ...prevPosts]); // Добавляем новый пост в начало списка
       setModal(false);
     } catch (error) {
       console.error("Error creating post:", error);
     }
   };
 
-  const removePost = (post) => {
-    setPosts(posts.filter((p) => p.id !== post.id));
+  const removePost = async (post) => {
+    try {
+      await PostService.deletePost(post.id);
+      setAllPosts(allPosts.filter((p) => p.id !== post.id));
+    } catch (error) {
+      console.error("Ошибка при удалении поста:", error);
+    }
   };
 
-  const changePage = (newPage) => {
-    setPage(newPage);
-    fetchPosts(limit, newPage);
-  };
+  const sortedAndSearchedPosts = usePosts(allPosts, filter.sort, filter.query);
 
   return (
     <div className='events'>
@@ -82,7 +82,6 @@ function Events() {
         <div>
           {isAuth && (
             <div>
-              <MyButton onClick={fetchPosts}>Запросить посты</MyButton>
               <MyButton onClick={() => setModal(true)}>
                 Создать новость
               </MyButton>
@@ -94,24 +93,17 @@ function Events() {
 
           <PostFilter filter={filter} setFilter={setFilter} />
           {postError && <h1>Произошла ошибка {postError}</h1>}
-          {arePostsLoading ? (
+          <PostList
+            remove={removePost}
+            posts={sortedAndSearchedPosts}
+            title={"Новости и мероприятия"}
+          />
+          <div ref={lastElement}></div>
+          {arePostsLoading && (
             <div className='loading'>
               <Loader />
             </div>
-          ) : (
-            <PostList
-              remove={removePost}
-              posts={sortedAndSearchedPosts}
-              title={"Новости и мероприятия"}
-            />
           )}
-          <div className='pag'>
-            <Pagination
-              page={page}
-              changePage={changePage}
-              totalPages={totalPages}
-            />
-          </div>
         </div>
       </div>
     </div>

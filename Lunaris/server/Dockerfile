@@ -1,14 +1,13 @@
-FROM node:14.17.3
+FROM node:20.17.0
 
 WORKDIR /server
 
-COPY package.json /server/package.json
-COPY package-lock.json /server/package-lock.json
-
+COPY package.json package-lock.json ./
 
 RUN npm install
 
-COPY .. /server
+
+COPY . .
 
 EXPOSE 3001
 

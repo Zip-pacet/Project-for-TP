@@ -9,10 +9,10 @@ const PostList = ({ posts, title, remove }) => {
         {Array.isArray(posts) && posts.length > 0 ? (
           posts.map((post, index) => (
             <PostItem
+              key={post.id} // Используйте уникальный идентификатор поста
               remove={remove}
               number={index + 1}
               post={post}
-              key={post.id}
             />
           ))
         ) : (

@@ -3,14 +3,15 @@ import MyModal from "../modal/MyModal";
 import MyButton from "../button/MyButton";
 import MyInput from "../input/MyInput";
 import { AuthContext } from "../../../context";
+import { useNavigate } from "react-router-dom";
 
 const AdminLogin = ({ authModal, setAuthModal }) => {
+  const navigate = useNavigate();
   const { isAuth, setIsAuth } = useContext(AuthContext);
   const [loginInput, setLoginInput] = useState("");
   const [passwordInput, setPasswordInput] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
 
-  // Array of admin users with login and password
   const adminUsers = [
     { login: "admin1", password: "password" },
     { login: "admin2", password: "securePass456" },
@@ -20,7 +21,6 @@ const AdminLogin = ({ authModal, setAuthModal }) => {
     if (localStorage.getItem("auth")) setIsAuth(true);
   }, [setIsAuth]);
 
-  // Login function with credential validation
   const login = (event) => {
     event.preventDefault();
     const admin = adminUsers.find(
@@ -29,8 +29,9 @@ const AdminLogin = ({ authModal, setAuthModal }) => {
     if (admin) {
       setIsAuth(true);
       localStorage.setItem("auth", "true");
-      setAuthModal(false); // Close modal after successful login
-      setErrorMessage(""); // Clear any previous error message
+      setAuthModal(false);
+      setErrorMessage("");
+      navigate(`/events`); // Redirect after successful login
     } else {
       setErrorMessage("Неправильный пароль или логин!");
     }
@@ -45,13 +46,11 @@ const AdminLogin = ({ authModal, setAuthModal }) => {
   return (
     <div>
       {isAuth ? (
-        // Show logout modal when the admin is logged in
         <MyModal visible={authModal} setVisible={setAuthModal}>
           <h3>Уже уходите?</h3>
           <MyButton onClick={logout}>Выйти</MyButton>
         </MyModal>
       ) : (
-        // Show login modal when the admin is not logged in
         <MyModal visible={authModal} setVisible={setAuthModal}>
           <form onSubmit={login}>
             <MyInput

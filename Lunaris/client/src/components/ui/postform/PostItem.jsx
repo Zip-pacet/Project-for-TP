@@ -17,7 +17,7 @@ const PostItem = (props) => {
         <div className='post__content'>
           {/*<strong>{props.post.id}</strong>*/}
           <div className='post__title'>{props.post.title}</div>
-          <div className='post__body'>{props.post.subtitle}</div>
+          <div className='post__body'>{props.post.description}</div>
           <div className='post__btns'>
             {isAuth ? (
               <div>
@@ -39,7 +39,7 @@ const PostItem = (props) => {
         <div className='post__content'>
           <img
             className='post__img'
-            src={"http://backend:3001/" + props.post.picture}
+            src={"http://server:3001/" + props.post.image}
             alt={props.post.title}
             onError={(e) => {
               e.target.onerror = null; // предотвратить бесконечный цикл

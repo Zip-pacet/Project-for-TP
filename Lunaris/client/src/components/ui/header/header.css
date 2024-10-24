@@ -21,7 +21,7 @@
   display: flex;
   align-items: center;
   margin: 0;
-  padding: 0;
+  padding: 10px;
   gap: 3rem; /* Adjust spacing between nav items */
   flex-wrap: wrap; /* Allows the nav items to wrap when screen size is reduced */
 }
