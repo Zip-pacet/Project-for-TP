@@ -3,7 +3,7 @@ import axios from "axios";
 export default class PostService {
   static async getAll(limit = 5, page = 1) {
     try {
-      const response = await axios.get("http://localhost:3001/api/posts", {
+      const response = await axios.get("http://server:3001/api/posts", {
         params: {
           _limit: limit,
           _page: page,
@@ -28,7 +28,7 @@ export default class PostService {
     console.log(`Запрос на получение поста с ID: ${id}`);
 
     try {
-      const response = await axios.get(`http://localhost:3001/api/posts/${id}`);
+      const response = await axios.get(`http://server:3001/api/posts/${id}`);
       console.log("Ответ от API на получение поста:", response.data);
       return response.data;
     } catch (error) {
@@ -45,7 +45,7 @@ export default class PostService {
 
     try {
       const response = await axios.post(
-        "http://localhost:3001/api/posts",
+        "http://server:3001/api/posts",
         postData,
         {
           headers: {
@@ -69,7 +69,7 @@ export default class PostService {
 
     try {
       const response = await axios.put(
-        `http://localhost:3001/api/posts/${id}`,
+        `http://server:3001/api/posts/${id}`,
         postData,
         {
           headers: {
@@ -92,9 +92,7 @@ export default class PostService {
     console.log(`Запрос на удаление поста с ID: ${id}`);
 
     try {
-      const response = await axios.delete(
-        `http://localhost:3001/api/posts/${id}`
-      );
+      const response = await axios.delete(`http://server:3001/api/posts/${id}`);
       console.log("Ответ от API на удаление поста:", response.data);
       return response.data;
     } catch (error) {

@@ -5,6 +5,8 @@ services:
     container_name: client
     ports:
       - "3000:3000"
+    networks:
+      - app-network
 
   backend:
     build:
@@ -12,22 +14,33 @@ services:
     container_name: server
     ports:
       - "3001:3001"
-    depends_on:
-      - postgres
+    networks:
+      - app-network
 
   postgres:
     image: postgres
     restart: always
     environment:
       POSTGRES_PASSWORD: postgres
+      POSTGRES_USER: postgres
     ports:
       - "5432:5432"
     volumes:
-      - dbdata6:/data/db
+      - ./db-init.sql:/docker-entrypoint-initdb.d/init.sql
+    networks:
+      - app-network
+
   adminer:
     image: adminer
     restart: always
     ports:
-      - 8080:8080
+      - "8080:8080"
+    networks:
+      - app-network
+
 volumes:
   dbdata6:
+
+networks:
+  app-network:
+    driver: bridge
