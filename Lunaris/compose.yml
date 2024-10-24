@@ -26,7 +26,8 @@ services:
     ports:
       - "5432:5432"
     volumes:
-      - ./db-init.sql:/docker-entrypoint-initdb.d/init.sql
+      - ./server/init.sql:/docker-entrypoint-initdb.d/init.sql
+      - pgdata:/var/lib/postgressql/data
     networks:
       - app-network
 
@@ -40,6 +41,7 @@ services:
 
 volumes:
   dbdata6:
+  pgdata:
 
 networks:
   app-network:

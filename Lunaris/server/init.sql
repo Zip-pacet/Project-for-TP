@@ -1,6 +1,4 @@
-CREATE DATABASE lunaris;
-
-\connect lunaris;
+\c postgres;
 
 CREATE TABLE posts (
     id SERIAL PRIMARY KEY,
