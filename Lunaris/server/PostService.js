@@ -16,16 +16,21 @@ class PostService {
 
   async getAll(limit, page, sort, order) {
     const offset = (page - 1) * limit;
-
     const query = `
-      SELECT * FROM posts
-      ORDER BY ${sort} ${order}
-      LIMIT $1 OFFSET $2;`;
-
-    const posts = await pool.query(query, [limit, offset]);
-
-    return posts.rows;
-  }
+    SELECT * FROM posts
+    ORDER BY ${sort} ${order}
+    LIMIT $1 OFFSET $2
+    `;
+    const values = [limit, offset];
+    
+    try {
+    const result = await pool.query(query, values);
+    return result.rows;
+    } catch (error) {
+    console.error("Ошибка в запросе getAll:", error);
+    throw error;
+    }
+    }
 
   async getTotalCount() {
     const query = "SELECT COUNT(*) FROM posts;";

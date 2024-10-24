@@ -36,8 +36,18 @@ class PostController {
         _order = "ASC",
       } = req.query;
 
+      console.log("Запрос на получение постов:", {
+        _limit,
+        _page,
+        _sort,
+        _order,
+      });
+
       const posts = await PostService.getAll(_limit, _page, _sort, _order);
+      console.log("Посты получены:", posts);
+
       const totalCount = await PostService.getTotalCount();
+      console.log("Общее количество постов:", totalCount);
 
       return res.json({
         posts,
@@ -46,7 +56,10 @@ class PostController {
         totalPages: Math.ceil(totalCount / _limit),
       });
     } catch (error) {
-      return res.status(500).json({ message: "Ошибка при получении постов" });
+      console.error("Ошибка при получении постов:", error);
+      return res
+        .status(500)
+        .json({ message: "Ошибка при получении постов", error: error.message });
     }
   }
 
