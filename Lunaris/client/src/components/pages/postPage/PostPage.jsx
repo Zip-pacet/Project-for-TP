@@ -111,7 +111,7 @@ const PostPage = () => {
                 {post.image && (
                   <div className='post-image-container'>
                     <img
-                      src={`http://localhost:3001/${post.image}`}
+                      src={`http://193.227.240.138:3001/${post.image}`}
                       alt={post.title}
                       className='post-image'
                     />
@@ -140,7 +140,7 @@ const PostPage = () => {
                 {post.image && (
                   <div className='post-image-container'>
                     <img
-                      src={`http://localhost:3001/${post.image}`}
+                      src={`http://193.227.240.138:3001/${post.image}`}
                       alt={post.title}
                       className='post-image'
                     />
