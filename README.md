@@ -19,7 +19,8 @@
 * [Курсовой проект](https://github.com/Zip-pacet/Project-for-TP/tree/main/Documentation/%D0%9A%D1%83%D1%80%D1%81%D0%BE%D0%B2%D0%BE%D0%B9%20%D0%BF%D1%80%D0%BE%D0%B5%D0%BA%D1%82)
 # Сопутствующие проекту презентации:
 * [Презентация](https://github.com/Zip-pacet/Project-for-TP/tree/main/Documentation/%D0%9F%D1%80%D0%B5%D0%B7%D0%B5%D0%BD%D1%82%D0%B0%D1%86%D0%B8%D1%8F)
-* [Презентация к защите](https://github.com/Zip-pacet/Project-for-TP/blob/main/Documentation/%D0%9F%D1%80%D0%B5%D0%B7%D0%B5%D0%BD%D1%82%D0%B0%D1%86%D0%B8%D1%8F/%D0%9F%D1%80%D0%B5%D0%B7%D0%B5%D0%BD%D1%82%D0%B0%D1%86%D0%B8%D1%8F-%D0%B7%D0%B0%D1%89%D0%B8%D1%82%D0%B0-Lunaris.pdf)
+* [Презентация к защите PDF](https://drive.google.com/file/d/1vr0s06wxgfFn7wcYGZ3-wCmbp804dfM2/view?usp=sharing)
+* [Презентация к защите pptx](https://docs.google.com/presentation/d/1VbJtNpnScXX3Z1jPMjNvcVDao5358DmC/edit?usp=sharing&ouid=112301599194844947130&rtpof=true&sd=true)
 * [Презентация ко второй аттестации](https://github.com/Zip-pacet/Project-for-TP/blob/main/Documentation/Презентация/Prezentatsia_prodelannoy_raboty_ko_vtoroy_attestatsii.pdf)
 # Сопутствующие проекту видео:
 * [Видеопрезентация](https://youtu.be/-CdxAAl24JQ)
