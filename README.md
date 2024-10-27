@@ -26,7 +26,7 @@
 * [Видеопрезентация](https://youtu.be/-CdxAAl24JQ)
 * [Видеоотчет по 2й аттестации](https://youtu.be/nfgjpEt-a_E)
 * [Видеопрезентация работы приложения](https://drive.google.com/file/d/18tDbi4S7zhzCEMJsItxBXbXGgde9ZA2B/view?usp=sharing)
-* [Видеопрезентация к защите](https://drive.google.com/file/d/1ahtE5EXBYxOWIdwqYQk6WZkwIF0e4UdW/view)
+* [Видеопрезентация к защите](https://drive.google.com/file/d/1wRGsUvLtw8Sio5ZXYJE-B65nmgZni3Sp/view?usp=sharing)
 # Ссылка на проект
 http://lunaris.ddns.net/ <br>
 <br>
