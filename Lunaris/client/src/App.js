@@ -21,6 +21,7 @@ import { AuthContext } from "./context";
 import "./styles/common.css";
 
 import YandexMetrica from "./utils/YandexMetrica";
+window.SERVER_IP = "http://89.111.169.222:3001";
 
 function App() {
   const [isAuth, setIsAuth] = useState(false);

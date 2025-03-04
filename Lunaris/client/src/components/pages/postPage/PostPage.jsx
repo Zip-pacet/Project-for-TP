@@ -31,7 +31,7 @@ const PostPage = () => {
 
   useEffect(() => {
     fetchPostById(params.id);
-    window.scrollTo(0, 0); // Scroll to the top of the page when the component mounts
+    window.scrollTo(0, 0); // Прокрутка вверх страницы при монтировании компонента
   }, [params.id]);
 
   const handleUpdatePost = async () => {
@@ -41,16 +41,16 @@ const PostPage = () => {
       updatedPostData.append("description", post.description);
       updatedPostData.append("body", post.body);
 
-      // Include new image if uploaded
+      // Добавляем новое изображение, если оно загружено
       if (newImage) {
         updatedPostData.append("image", newImage);
       } else if (imageToDelete) {
-        updatedPostData.append("deleteImage", true); // Indicate to delete the existing image
+        updatedPostData.append("deleteImage", true); // Указываем на удаление существующего изображения
       }
 
       await PostService.updatePost(params.id, updatedPostData);
       setIsEditing(false);
-      fetchPostById(params.id); // Refresh the post data after update
+      fetchPostById(params.id); // Обновляем данные поста после редактирования
     } catch (error) {
       setPostError(error.message);
     }
@@ -66,11 +66,11 @@ const PostPage = () => {
 
   const handleImageUpload = (e) => {
     setNewImage(e.target.files[0]);
-    setImageToDelete(false); // Reset deletion state when a new image is uploaded
+    setImageToDelete(false); // Сбрасываем состояние удаления при загрузке нового изображения
   };
 
   const handleDeleteImage = () => {
-    setImageToDelete(true); // Set the flag to delete the existing image
+    setImageToDelete(true); // Устанавливаем флаг для удаления существующего изображения
   };
 
   return (
@@ -111,7 +111,7 @@ const PostPage = () => {
                 {post.image && (
                   <div className='post-image-container'>
                     <img
-                      src={`http://193.227.240.138:3001/${post.image}`}
+                      src={`${window.SERVER_IP}/${post.image}`} // Используем глобальную переменную
                       alt={post.title}
                       className='post-image'
                     />
@@ -135,12 +135,12 @@ const PostPage = () => {
               <div className='post-content'>
                 <h1 className='post-title'>{post.title}</h1>
                 <h2 className='post-text'>{post.description}</h2>{" "}
-                {/* Updated class for description */}
+                {/* Обновлённый класс для описания */}
                 <p className='post-body'>{post.body}</p>
                 {post.image && (
                   <div className='post-image-container'>
                     <img
-                      src={`http://193.227.240.138:3001/${post.image}`}
+                      src={`${window.SERVER_IP}/${post.image}`} // Используем глобальную переменную
                       alt={post.title}
                       className='post-image'
                     />

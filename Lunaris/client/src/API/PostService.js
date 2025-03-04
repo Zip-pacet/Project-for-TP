@@ -4,7 +4,7 @@ export default class PostService {
   static async getAll(limit = 5, page = 1) {
     try {
       const response = await axios.get(
-        "http://193.227.240.138:3001/api/posts",
+        `${window.SERVER_IP}/api/posts`, // Используем глобальную переменную
         {
           params: {
             _limit: limit,
@@ -32,7 +32,7 @@ export default class PostService {
 
     try {
       const response = await axios.get(
-        `http://193.227.240.138:3001/api/posts/${id}`
+        `${window.SERVER_IP}/api/posts/${id}` // Используем глобальную переменную
       );
       console.log("Ответ от API на получение поста:", response.data);
       return response.data;
@@ -50,7 +50,7 @@ export default class PostService {
 
     try {
       const response = await axios.post(
-        "http://193.227.240.138:3001/api/posts",
+        `${window.SERVER_IP}/api/posts`, // Используем глобальную переменную
         postData,
         {
           headers: {
@@ -74,7 +74,7 @@ export default class PostService {
 
     try {
       const response = await axios.put(
-        `http://193.227.240.138:3001/api/posts/${id}`,
+        `${window.SERVER_IP}/api/posts/${id}`, // Используем глобальную переменную
         postData,
         {
           headers: {
@@ -98,7 +98,7 @@ export default class PostService {
 
     try {
       const response = await axios.delete(
-        `http://193.227.240.138:3001/api/posts/${id}`
+        `${window.SERVER_IP}/api/posts/${id}` // Используем глобальную переменную
       );
       console.log("Ответ от API на удаление поста:", response.data);
       return response.data;
